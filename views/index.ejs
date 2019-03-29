@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/css/common.css">
+<script src="/js/common.js"></script>
+<title>띵언</title>
+</head>
+<body>
+	<% include ./include/header.ejs %>
+	<section class="section">
+		<h1 class="hidden">인사말</h1>
+		<p class="f-sub-title">당신의 한 문장이 누군가의 인생을 바꿉니다. 자신만의 멋진 명언을 공유해주세요.</p>
+	</section>
+	<main id="main" class="section">
+		<h1 class="hidden">메인 컨텐츠</h1>
+		<section id="saying-list">
+			<h2 class="hidden">명언 리스트</h2>
+			<article class="saying-box">
+				<h3 class="hidden">명언</h3>
+				<div class="account-info">
+					<img class="account-image" src="/images/common/account_circle.svg" />
+					<span class="saying-name">Seongcheol Hong</span>
+				</div>
+				<div class="saying-content-box">
+					<p class="saying-content"> 행복은 멀리 있는게 아니다. 바로 옆을 바라봐라. 그것이 행복이다.</p>
+				</div>
+			</article>
+		</section>
+	</main>
+	<% include ./include/footer.ejs %>
+</body>
+</html>

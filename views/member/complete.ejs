@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/member/member.css">
+<script src="/js/common.js"></script>
+<title>띵언</title>
+</head>
+<body>
+    <% include ../include/header.ejs %>
+    <section class="section">
+        <h1 class="hidden">인사말</h1>
+        <p class="f-sub-title">가입을 환영합니다. 계정사진은 프로필 페이지에서 변경 가능합니다.</p>
+    </section>
+	<main id="main" class="section">
+        <h1 class="hidden">메인 컨텐츠</h1>
+        <section id="login-box">
+            <div class="field full">
+                <a href="/member/login"><button class="button primary fit">로그인 페이지</button></a>
+            </div>
+            <div class="field full">
+                <a href="/"><button class="button fit">메인 페이지</button></a>
+            </div>
+        </section>
+	</main>
+	<% include ../include/footer.ejs %>
+</body>
+</html>

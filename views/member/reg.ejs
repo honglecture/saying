@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/member/member.css">
+<script src="/js/common.js"></script>
+<script src="/js/member/reg.js"></script>
+<title>띵언</title>
+</head>
+<body>
+    <% include ../include/header.ejs %>
+    <section class="section">
+        <h1 class="hidden">인사말</h1>
+        <p class="f-sub-title">회원가입</p>
+    </section>
+	<main id="main" class="section">
+        <h1 class="hidden">메인 컨텐츠</h1>
+        <section id="reg-box">
+            <form class="member-form" method="post">
+                <div class="field full">
+                    <span class="field-name name-id">아이디</span><span class="field-name star"> *</span>
+                    <input class="i-text i-normal" type="text" name="id" />
+                    <span class="field-sub sub-id">1~15자의 영문, 숫자만 사용 가능합니다.</span>
+                </div>
+                <div class="field full">
+                    <span class="field-name name-password">비밀번호</span><span class="field-name star"> *</span>
+                    <input class="i-text i-normal" type="password" name="password" />
+                    <span class="field-sub sub-password">6~20자 영문, 숫자를 포함해 주세요.</span>
+                </div>
+                <div class="field full">
+                    <span class="field-name name-password2">비밀번호 확인</span><span class="field-name star"> *</span>
+                    <input class="i-text i-normal" type="password" name="password2" />
+                    <span class="field-sub sub-password2">비밀번호를 다시 입력해 주세요.</span>
+                </div>
+                <div class="field full">
+                    <span class="field-name name-nickname">닉네임</span><span class="field-name star"> *</span>
+                    <input class="i-text i-normal" type="text" name="nickname" />
+                    <span class="field-sub sub-nickname">1~15자의 영문, 숫자, 한글만 사용 가능합니다.</span>
+                </div>
+                <div class="field full">
+                    <span class="field-name name-email">이메일</span><span class="field-name star"> *</span>
+                    <input class="i-text i-normal" type="text" name="email" />
+                    <span class="field-sub sub-email">이메일은 계정찾기에 활용됩니다.</span>
+                </div>
+                <div class="field full">
+                    <button class="button primary fit" id="reg-button">등록</button>
+                </div>
+            </form>
+        </section>
+	</main>
+	<% include ../include/footer.ejs %>
+</body>
+</html>

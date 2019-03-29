@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/member/member.css">
+<script src="/js/common.js"></script>
+<script src="/js/member/login.js"></script>
+<title>띵언</title>
+</head>
+<body>
+    <% include ../include/header.ejs %>
+    <section class="section">
+        <h1 class="hidden">인사말</h1>
+        <p class="f-sub-title">로그인</p>
+    </section>
+	<main id="main" class="section">
+        <h1 class="hidden">메인 컨텐츠</h1>
+        <section id="login-box">
+            <form class="login-form" method="post">
+                <div class="field full warning-box hidden">
+                    <span class="warning-text">아이디 또는 비밀번호를 다시 확인해 주세요.</span>
+                </div>
+                <div class="field full">
+                    <input class="i-text i-normal" type="text" name="id" placeholder="아이디" />
+                </div>
+                <div class="field full">
+                    <input class="i-text i-normal" type="password" name="password" placeholder="비밀번호" />
+                </div>
+                <div class="find-button">
+                    <button class="button small">계정찾기</button>
+                </div>
+                <div class="field full">
+                    <button class="button primary fit" id="login-button">로그인</button>
+                </div>
+            </form>
+            <div class="field full reg-button">
+                <a href="/member/reg"><button class="button fit">회원가입</button></a>
+            </div>
+        </section>
+	</main>
+	<% include ../include/footer.ejs %>
+</body>
+</html>

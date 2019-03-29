@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/member/member.css">
+<script src="/js/common.js"></script>
+<script src="/js/member/profile.js"></script>
+<title>띵언</title>
+</head>
+<body>
+    <% include ../include/header.ejs %>
+    <section class="section">
+        <h1 class="hidden">인사말</h1>
+        <p class="f-sub-title">프로필</p>
+    </section>
+	<main id="main" class="section">
+            <h1 class="hidden">메인 컨텐츠</h1>
+            <section id="reg-box">
+                <div class="field full warning-box hidden">
+                    <span class="warning-text"></span>
+                </div>
+                <div class="profile-image">
+                <% if(locals.member.photo == 'default'){ %>
+                    <img class="account-image-menu photo" src="/images/common/account_circle.svg" />
+                <% } else{ %>
+                    <img class="account-image-menu photo" src="/img/account-photo/<%=locals.member.photo%>" />
+                <% } %>
+                </div>
+                <div class="change-button">
+                    <input type="file" id="file-button" name="photo-file" hidden="true" value="파일선택" />
+                    <button class="button small photo-button">사진변경</button>
+                </div>
+                <div class="field full">
+                    <span class="field-name name-id">아이디</span>
+                    <input class="i-text i-normal" type="text" value="<%=locals.member.id%>" readonly />
+                </div>
+                <div class="field full">
+                    <span class="field-name name-nickname">닉네임</span>
+                    <input class="i-text i-normal" type="text" value="<%=locals.member.nickname%>" readonly />
+                </div>
+                <div class="field full">
+                    <span class="field-name name-email">이메일</span>
+                    <input class="i-text i-normal" type="text" readonly value="<%=locals.member.email%>" />
+                </div>
+                <div class="field full">
+                    <button class="button primary fit" id="reg-button">비밀번호 변경</button>
+                </div>
+            </section>
+        </main>    
+	<% include ../include/footer.ejs %>
+</body>
+</html>

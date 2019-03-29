@@ -1,0 +1,68 @@
+<header id="header" class="section">
+    <section>
+        <h1 class="f-title"><a href="/">오늘의 명언</a></h1>
+    </section>
+    <section id="header-buttons">  
+        <h1 class="hidden">메뉴 버튼</h1> 
+        <button>
+            <img class="menu-button" src="/images/common/baseline-menu.svg" alt="side-menu-button">
+        </button>
+    </section>
+    <!-- aside로 묶는다. -->
+    <aside id="login-info">
+        <h1>MENU</h1>
+        <section class="profile">
+        <% if(locals.member){ %>
+            <a href="/member/profile">
+                <div>
+                    <% if(locals.member.photo == 'default'){ %>
+                        <img class="account-image-menu" src="/images/common/account_circle_white.svg" />
+                    <% } else{ %>
+                        <img class="account-image-menu" src="/img/account-photo/<%=locals.member.photo%>" />
+                    <% } %>
+                    <div>
+                        <span><%=member.nickname%></span>
+                    </div>
+                </div>
+            </a>
+        <% } else{ %>
+            <a href="/member/login">
+                <div><img class="account-image-menu" src="/images/common/account_circle_white.svg" /></div>
+                <div><span>로그인</span></div>
+            </a>
+         <% } %> 
+        </section>
+        <section id="side-menu">
+            <h1 class="hidden">강사메뉴</h1>
+            <ul>
+                <li><a href="">문제관리</a></li>
+                <li><a href="">시험관리</a></li>
+                <li><a href="">일정관리</a></li>
+                <li><a href="">수업관리</a></li>
+                <% if(locals.member){ %>
+                    <li><a href="/member/logout">로그아웃</a></li>
+                <% } %>
+            </ul>
+        </section>
+    </aside>
+</header>
+
+
+
+<!-- <script>
+    window.addEventListener("load", function(){
+        var header = document.querySelector("#header");
+        var headerButtons = document.querySelector("#header-buttons");
+        header.onclick = function(e){
+            var el = e.target;
+            if(el.nodeName =="HEADER")
+                header.classList.remove("menu-show");
+            else 
+                return;
+        }; 
+        headerButtons.onclick = function(e){
+            header.classList.add("menu-show"); 
+            e.stopPropagation();
+        };
+    });
+</script> -->

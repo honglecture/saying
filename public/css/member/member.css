@@ -1,0 +1,40 @@
+#login-box {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#login-box div{
+    margin-bottom: 1.0rem;
+}
+
+#login-box .find-button {
+    text-align: left;
+}
+
+#login-box .reg-button {
+    margin-top: 3rem;
+}
+
+#reg-box {
+    
+    margin-top: 2rem;
+}
+
+#reg-box div{
+    margin-bottom: 1.0rem;
+}
+
+#reg-box .profile-image{
+    text-align: center;
+}
+
+#reg-box .profile-image img{
+    width: 5.0rem;
+    height: 5.0rem;
+    border-radius: 2.5rem;
+    object-fit: cover;
+}
+
+#reg-box .change-button{
+    text-align: center;
+}

@@ -1,0 +1,407 @@
+/*----------import---------*/
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+/*----------초기화----------*/
+body {
+    margin: 0px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none; 
+    outline: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+input {
+    border: none;
+    box-shadow: none;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    -o-appearance:none;
+    appearance: none;    
+}
+
+input:focus{
+    outline: none;
+}
+
+/*----------공통------------*/
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #585858;
+    -webkit-tap-highlight-color:transparent;
+}
+
+/*----------background----- */
+body {
+    background-color: #f6f6f6;
+}
+
+.section {
+    background: #ffffff;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+/*----------display--------*/
+.hidden {
+    display: none;
+}
+
+/*----------field----------*/
+.field.full {
+    width: 100%;
+}
+
+.field.half {
+    width: 50%;
+}
+
+/*----------button---------*/
+.button {
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 2px #585858;
+    color: #585858 !important;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1rem;
+    height: 3rem;
+    letter-spacing: 0.35em;
+    line-height: 3em;
+    overflow: hidden;
+    padding: 0 1.25em 0 1.6em;
+    text-align: center;
+}
+
+.button.primary {
+    background-color: #585858;
+    color: #ffffff !important;
+}
+
+.button.fit {
+    width: 100%;
+}
+
+.button.small {
+    font-weight: 600;
+    font-size: 0.6rem;
+    height: 1.7rem;
+    line-height: 1.7em;
+    overflow: hidden;
+    padding: 0 1.25em 0 1.6em;
+    text-align: center;
+}
+
+/*----------field-name-----*/
+.field-name {
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+}
+
+.field-name.star {
+    color: #cd2431;
+}
+
+.field-name.warning {
+    color: #cd2431;
+}
+
+.field-sub {
+    font-size: 0.8rem;
+}
+
+.field-sub.warning {
+    color: #cd2431;
+}
+
+/*----------input-text-----*/
+.i-text {
+    background-color: transparent;
+    border-bottom: solid 1px #c9c9c9;
+    color: inherit;
+    outline: 0;
+    padding: 0;
+    text-decoration: none;
+    width: 100%;
+}
+
+.i-normal {
+    font-size: 1rem;
+    height: 3rem;
+}
+
+/*----------font-----------*/
+.f-title {
+    font-weight: 900;
+    font-size: 2.5rem;
+}
+
+.f-sub-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.f-normal {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.f-sub {
+    font-weight: 400;
+    font-size: 0.7rem;
+}
+
+.w250 {
+    font-weight: 250;
+}
+   
+.w300 {
+    font-weight: 300;
+}
+   
+.w350 {
+    font-weight: 350;
+}
+   
+.w400 {
+    font-weight: 400;
+}
+   
+.w500 {
+    font-weight: 500;
+}
+   
+.w700 {
+    font-weight: 700;
+}
+   
+.w800 {
+    font-weight: 800;
+}
+   
+.w900 {
+    font-weight: 900;
+}
+
+/*----------field-check------*/
+.warning-box {
+    border-radius: 5px;
+    border-width: 1px;
+    border: 1px solid #ddc0c4;
+    font-size: 0.8rem;
+    /* margin: 0 auto 10px; */
+    padding: 15px 20px;
+    text-align: left;
+    background-color: #ffdce0;
+}
+
+.warning-text {
+    color: #86181d;
+}
+   
+/*----------header-----------*/
+#header {
+    
+}
+
+#header:after {
+    display: block;
+    position: fixed;
+    background : #000000;
+    top: 0px;   
+    left: 0px;
+    width: 100%; 
+    height: 0%; /*장막을 위로 올린다.*/ 
+    content: "";
+    opacity: 0; 
+    transition : 500ms opacity ease;
+}
+
+
+#header-buttons { 
+    /* height : 100%;  */
+    position: absolute;  
+    top: 1rem; 
+    right:0px;
+    padding-right: 10px; 
+}
+
+#header-buttons .menu-button { 
+    width: 40px;
+}
+
+#header #login-info {
+    /*가상클래쓰를 쓰기 위해 header에 클래스를 둔다. 형제로 가즈아*/
+    position: fixed;
+    top: 0px;
+    right: -60%;
+    width: 60%;
+    height: 100%; 
+    background: #585858;
+    z-index: 10;
+    display: block;
+    transition : 500ms right ease;
+    padding: 2rem 1.5rem 0rem 1.5rem;
+}
+
+#header #login-info h1{
+    color: #ffffff;
+}
+
+#header #login-info a{
+    color: #ffffff;
+    font-weight: 100;
+}
+
+#header.menu-show #login-info {
+    right: 0%;
+}
+
+#header.menu-show:after {
+    background-color: #ffffff;
+    opacity: 0.8; 
+    height: 100%;
+}
+
+#header #side-menu li {
+    padding: 1.5rem 0rem;
+    border-bottom: 1px solid #717171;
+}
+
+#header #side-menu li:last-child {
+    border-bottom: none;
+}
+
+#header .profile{
+    text-align: center;
+    margin-top: 1.0rem;
+}
+
+#header .profile .account-image-menu{
+    width: 4.0rem;
+    height: 4.0rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+#header .profile span{
+    color: #ffffff;
+}
+
+/*----------footer-----------*/
+#footer {
+    text-align: center;
+}
+
+/*----------main--------------*/
+#main {
+    
+    width: 100%;
+}
+
+/*----------saying-list------*/
+#saying-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*----------saying-box-------*/
+.saying-box {
+    background: #ffffff url('/images/common/paper.jpg') no-repeat center;
+    background-size: cover;
+    min-height: 500px;
+}
+
+@media screen and (min-width: 1px) and (max-width: 480px){
+    .saying-box {
+        width: 100%;
+        margin: 1.25rem 0 0 0;
+    }
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 736px){
+    .saying-box {
+        width: calc(50% - 1.25rem);
+        margin: 1.25rem 0 0 1.25rem;
+    }
+    #saying-list {
+        margin: 0rem 0 0 -1.25rem;
+    }
+}
+@media screen and (min-width: 737px) and (max-width: 1280px){
+    .saying-box {
+        width: calc(50% - 2.5rem);
+        margin: 2.5rem 0 0 2.5rem;
+    }
+    #saying-list {
+        margin: 0rem 0 0 -2.5rem;
+    }
+}
+
+@media screen and (min-width: 1281px){
+    .saying-box {
+        width: calc(33.3333333333% - 1.25rem);
+        margin: 1.25rem 0 0 1.25rem;
+    }
+    #saying-list {
+        margin: 0rem 0 0 -1.25rem;
+    }
+}
+
+.saying-box .account-info {
+    display: flex;
+    align-items: center;
+    padding: 1.0rem 1.0rem 0rem 1.0rem;
+}
+
+.saying-box .account-image {
+    margin-right: 0.5rem;
+	width:50px;
+    height:50px;
+    border-radius: 25px;
+    object-fit: cover;
+}
+
+.saying-box .saying-content-box {
+    padding: 1.0rem; 
+}
+
+.saying-name {
+    color: #3d4048;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.saying-content {
+    color: #565050;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+
