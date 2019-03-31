@@ -1,0 +1,58 @@
+#saying-write {
+    background: #ffffff url('/images/common/paper.jpg') no-repeat center;
+    background-size: cover;
+    position: relative;
+    /* min-height: 500px; */
+}
+
+#saying-write .account-info {
+    display: flex;
+    align-items: center;
+    padding: 1.0rem 1.0rem 0rem 1.0rem;
+}
+
+#saying-write .account-image {
+    margin-right: 0.5rem;
+	width:50px;
+    height:50px;
+    border-radius: 25px;
+    object-fit: cover;
+}
+
+#saying-write .saying-content-box {
+    padding: 1.0rem; 
+}
+
+#saying-write .saying-name {
+    color: #3d4048;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+#saying-write .saying-content {
+    color: #565050;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+#saying-write .saying-content-edit {
+    color: #565050;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background-color:transparent;
+    width: 100%;
+    min-height: 400px;
+    overflow:visible;
+}
+
+#saying-write .saying-writer {
+    position: absolute;
+    bottom: 1%;
+    right: 2%;
+    font-weight: 600;
+}
+
+#saying-info div{
+    margin-top: 1rem;
+}
+
