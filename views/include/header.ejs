@@ -18,7 +18,7 @@
                     <% if(locals.member.photo == 'default'){ %>
                         <img class="account-image-menu" src="/images/common/account_circle_white.svg" />
                     <% } else{ %>
-                        <img class="account-image-menu" src="/img/account-photo/<%=locals.member.photo%>" />
+                        <img class="account-image-menu" src="/img/<%=locals.member.photo%>" />
                     <% } %>
                     <div>
                         <span><%=member.nickname%></span>

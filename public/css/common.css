@@ -270,6 +270,7 @@ body {
 #header:after {
     display: block;
     position: fixed;
+    z-index: 9;
     background : #000000;
     top: 0px;   
     left: 0px;
@@ -283,6 +284,7 @@ body {
 
 #header-buttons { 
     /* height : 100%;  */
+    z-index : 1;
     position: absolute;  
     top: 1rem; 
     right:0px;
@@ -334,7 +336,7 @@ body {
 
 #header #side-menu li a{
     vertical-align: middle;
-    
+    font-weight: 400;
 }
 
 #header #side-menu li:last-child {
@@ -384,8 +386,10 @@ body {
 .saying-box {
     background: #ffffff url('/images/common/paper.jpg') no-repeat center;
     background-size: cover;
-    min-height: 500px;
+    min-height: 350px;
     position: relative;
+    z-index : 1;
+    border-radius: 7px;
 }
 
 @media screen and (min-width: 1px) and (max-width: 480px){
@@ -441,6 +445,7 @@ body {
 
 .saying-box .saying-content-box {
     padding: 1.0rem; 
+    padding-bottom: 2rem;
 }
 
 .saying-box .saying-name {
@@ -457,7 +462,32 @@ body {
 
 .saying-box .saying-writer {
     position: absolute;
-    bottom: 1%;
+    top: 1%;
     right: 2%;
+    font-size: 0.9rem;
     font-weight: 600;
+    z-index : 1;
+}
+
+/*---------tag---------*/
+
+.tag-list li{
+    display: inline-block;
+    margin-right: 3px;
+}
+
+.tag {
+    font-size: 0.9rem;
+    background: #585858;
+    color: #ffffff;
+    padding: 0px 5px;
+    border-radius: 15px;
+    font-weight: 300;
+}
+
+.tag-box {
+    position: absolute;
+    bottom: 1%;
+    left: 2%;
+    z-index : 1;
 }

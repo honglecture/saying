@@ -17,19 +17,27 @@
 	</section>
 	<main id="main" class="section">
 		<h1 class="hidden">메인 컨텐츠</h1>
+		<section id="saying-warning">
+			<div class="field full warning-box warning-name hidden">
+				<span class="warning-text">이름을 입력해 주세요.</span>
+			</div>
+			<div class="field full warning-box warning-content hidden">
+				<span class="warning-text">명언을 입력해 주세요.</span>
+			</div>
+		</section>
 		<section id="saying-write">
 			<h2 class="hidden">명언작성</h3>
 			<div class="account-info">
 			<% if(locals.member.photo == 'default'){ %>
-				<img class="account-image" src="/images/common/account_circle.svg" />
+				<img class="account-image my-photo" src="/images/common/account_circle.svg" />
 			<% } else{ %>
-				<img class="account-image" src="/img/account-photo/<%=member.photo%>" />
+				<img class="account-image my-photo" src="/img/<%=member.photo%>" />
 			<% } %>
 				<!-- <span class="saying-name"></span> -->
-				<input class="i-text saying-name" type="text" name="id" value="<%=member.nickname%>" placeholder="이름을 입력해 주세요." />
+				<input class="i-text saying-name" type="text" name="name" value="<%=member.nickname%>" placeholder="이름을 입력해 주세요." maxlength="20" />
 			</div>
 			<div class="saying-content-box">
-				<textarea class="saying-content-edit" placeholder="명언을 작성해 주세요."></textarea>
+				<textarea class="saying-content-edit" placeholder="명언을 작성해 주세요." maxlength="1000" name="content"></textarea>
 				<!-- <p class="saying-content">행복은 멀리 있는게 아니다. 바로 옆을 바라봐라. 그것이 행복이다.</p> -->
 			</div>
 			<div class="saying-writer">
@@ -40,23 +48,31 @@
 			<div class="field full">
 				<span class="field-name">사진</span>
 				<div class="find-button">
-					<button class="button small primary">내사진</button>
-					<button class="button small">사진변경</button>
+					<button class="button small primary my-button">내사진</button>
+					<button class="button small change-button">사진변경</button>
+					<input type="file" name="photo-file" hidden="true" value="파일선택" />
 				</div>
 			</div>
 			<div class="field full">
 				<span class="field-name">카테고리</span>
 				<!-- <input class="i-text i-normal" type="text" name="id" /> -->
 				<select name="category" class="select s-normal">
-					<option value="value">바보</option>
+					<option value="">-선택-</option>
+				<% for(let i = 0; i<category.length; i++){%>
+					<option value="<%=category[i].id%>"><%=category[i].value%></option>
+				<%}%>
 				</select>
 			</div>
 			<div class="field full">
 				<span class="field-name">태그</span>
-				<input class="i-text i-normal" type="text" name="id" />
+				<input class="i-text i-normal" type="text" name="tag" placeholder="띄어쓰기로 태그를 달아주세요." maxlength="30" />
+				<span class="field-sub sub-tag">태그는 5개까지 가능합니다.</span>
+				<ul class="tag-list">
+					<!-- <li><span class="tag">#dd</span></li> -->
+				</ul>
 			</div>
 			<div class="field full">
-				<button class="button primary fit" id="reg-button">등록</button>
+				<button class="button primary fit reg-button">등록</button>
 			</div>
 		</section>
 	</main>

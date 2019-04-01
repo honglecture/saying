@@ -2,6 +2,7 @@
     background: #ffffff url('/images/common/paper.jpg') no-repeat center;
     background-size: cover;
     position: relative;
+    border-radius: 7px;
     /* min-height: 500px; */
 }
 
@@ -47,9 +48,14 @@
 
 #saying-write .saying-writer {
     position: absolute;
-    bottom: 1%;
+    top: 1%;
     right: 2%;
+    font-size: 0.9rem;
     font-weight: 600;
+}
+
+#saying-warning .warning-box {
+    margin : 10px 0px;
 }
 
 #saying-info div{
