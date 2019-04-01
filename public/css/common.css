@@ -384,6 +384,15 @@ body {
 
 /*----------saying-box-------*/
 .saying-box {
+    /* background: #ffffff url('/images/common/paper.jpg') no-repeat center;
+    background-size: cover; */
+    /* min-height: 350px;
+    position: relative;
+    z-index : 1;
+    border-radius: 7px; */
+}
+
+.saying-background {
     background: #ffffff url('/images/common/paper.jpg') no-repeat center;
     background-size: cover;
     min-height: 350px;
@@ -445,7 +454,7 @@ body {
 
 .saying-box .saying-content-box {
     padding: 1.0rem; 
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
 }
 
 .saying-box .saying-name {
@@ -469,6 +478,41 @@ body {
     z-index : 1;
 }
 
+.saying-box .saying-menu-box {
+    margin-top: 5px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.saying-box .saying-menu-box img{
+    width: 33px;
+    margin-right: 5px;
+    vertical-align: middle;
+
+}
+
+.saying-box .saying-menu-box .chat{
+    width: 30px;
+    margin-right: 5px;
+}
+
+.saying-box .saying-menu-box .saying-menu-left{
+    width: 50%;
+    display: inline-block;
+    vertical-align: auto;
+
+}
+
+.saying-box .saying-menu-box .saying-menu-right{
+    text-align: right;
+    width: 48%;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.8rem;
+    font-weight: 500;
+
+}
+
 /*---------tag---------*/
 
 .tag-list li{
@@ -487,7 +531,7 @@ body {
 
 .tag-box {
     position: absolute;
-    bottom: 1%;
+    bottom: 4%;
     left: 2%;
     z-index : 1;
 }

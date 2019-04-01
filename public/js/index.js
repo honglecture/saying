@@ -67,7 +67,7 @@ window.addEventListener('load', ()=>{
     let sayingList = document.querySelector('#saying-list');
 
     
-    getSayingList();
+    // getSayingList();
 /*
 
 			<article class="saying-box">
