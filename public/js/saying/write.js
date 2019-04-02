@@ -66,34 +66,7 @@ window.addEventListener('load', ()=>{
         };
         // 다 읽어 왔을 때.. background에서.. 
         reader.readAsDataURL(file);
-        
-        // warningBox.classList.add('hidden');
-        // warningText.textContent = '';
-	
-        // // 이미지 업로드 가즈아
-        // let formData = new FormData();
-        // formData.append('img', file);
 
-        // let xhr = new XMLHttpRequest();
-        // xhr.onload = function () {
-        //     if (xhr.status === 200) {
-		// 		let result = JSON.parse(xhr.responseText).result;
-		// 		if(result){
-		// 			// 브라우저 메모리에 파일이 올라감
-		// 			// html5 기능 로컬 이미지 불러들이기
-		// 			let reader = new FileReader();
-		// 			reader.onload = (e) =>{ 
-		// 				photo.src = e.target.result; // 여기서 file 들어간다.
-		// 			};
-		// 			// 다 읽어 왔을 때.. background에서.. 
-		// 			reader.readAsDataURL(file);
-		// 		}
-        //     } else {
-		// 		console.error(xhr.responseText);
-        //     }
-        // };
-        // xhr.open('POST', '/member/change-photo');
-        // xhr.send(formData);
     };
     
     inputTag.onkeyup = ()=>{
@@ -150,25 +123,92 @@ window.addEventListener('load', ()=>{
 
         // 이미지 업로드 가즈아
         let formData = new FormData();
-        formData.append('img', file);
         formData.append('name', nameValue);
         formData.append('content', contentValue);
         formData.append('category', categoryValue);
         formData.append('tag', tag);
+        
+        
+        if(fileButton.value == ""){
+            formData.append('img', file);
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let result = JSON.parse(xhr.responseText).result;
+                    if(result){
+                        console.log(result);
+                        location.href = '/';
+                    }
+                } else {
+                    console.error(xhr.responseText);
+                }
+            };
+            xhr.open('POST', '/saying/write');
+            xhr.send(formData);
+        } else {
+            const fileName = file.name;
+            loadImage(
+                file,
+                (img) => {
+                    let width;
+                    let height;
+                    if(file.size>1024*1024*2){
+                        // 파일 사이즈 2mb
+                        width = (img.width * 5)/100;
+                        height = (img.height * 5)/100;
+                    } else if(file.size>1024*1024*1){
+                        width = (img.width * 10)/100;
+                        height = (img.height * 10)/100;
+                    } else if(file.size>1024*1024*0.5){
+                        width = (img.width * 20)/100;
+                        height = (img.height * 20)/100;
+                    } else if(file.size>1024*1024*0.1){
+                        width = (img.width * 50)/100;
+                        height = (img.height * 50)/100;
+                    } else {
+                        width = (img.width * 70)/100;
+                        height = (img.height * 70)/100;
+                    }
+                    const elem = document.createElement('canvas');
+                    elem.width = width;
+                    elem.height = height;
+                    const ctx = elem.getContext('2d');
+                    // img.width and img.height will contain the original dimensions
+                    ctx.drawImage(img, 0, 0, width, height);
+                    ctx.canvas.toBlob((blob) => {
+                        let newFile = new File([blob], fileName, {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        file = newFile;
+                        // 이미지 업로드 가즈아
+                        formData.append('img', file);
+                        let xhr = new XMLHttpRequest();
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                let result = JSON.parse(xhr.responseText).result;
+                                if(result){
+                                    location.href = '/';
+                                }
+                            } else {
+                                console.error(xhr.responseText);
+                            }
+                        };
+                        xhr.open('POST', '/saying/write');
+                        xhr.send(formData);
+    
+                    }, 'image/jpeg', 1);
+                },
+                {orientation: true}
+            );
+        }
 
-        let xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-				let result = JSON.parse(xhr.responseText).result;
-				if(result){
-                    console.log(result);
-				}
-            } else {
-				console.error(xhr.responseText);
-            }
-        };
-        xhr.open('POST', '/saying/write');
-        xhr.send(formData);
+
+
+
+
+
+
 
     };
 

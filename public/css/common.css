@@ -398,7 +398,7 @@ body {
     min-height: 350px;
     position: relative;
     z-index : 1;
-    border-radius: 7px;
+    border-radius: 15px;
 }
 
 @media screen and (min-width: 1px) and (max-width: 480px){
@@ -511,6 +511,30 @@ body {
     font-size: 0.8rem;
     font-weight: 500;
 
+}
+
+.saying-box .saying-like-box{
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.saying-reply-box {
+    line-height: 1.1rem;
+}
+
+.saying-reply-box .reply-nickname {
+    font-size: 0.8rem;
+    font-weight: 600;
+} 
+
+.saying-reply-box .reply-content {
+    font-size: 0.8rem;
+    font-weight: 400;
+} 
+
+.saying-reply-count {
+    font-size: 0.7rem;
+    font-weight: 500;
 }
 
 /*---------tag---------*/

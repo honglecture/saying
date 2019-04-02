@@ -16,7 +16,7 @@ const upload = multer({
         cb(null, path.basename(file.originalname, ext) + new Date().valueOf() + ext);
       },
     }),
-    limits: { fileSize: 10 * 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 const router = express.Router();
@@ -61,15 +61,6 @@ router.post('/write', isLoggedIn , upload.single('img') , async (req, res) => {
     return res.status(200).json({
         result: true
     });
-
-    
-
-
-    console.log(category);
-    console.log(content);
-    console.log(name);
-    console.log(fileName);
-    console.log(id);
 
 });
 

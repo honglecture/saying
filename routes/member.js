@@ -20,7 +20,7 @@ const upload = multer({
         cb(null, path.basename(file.originalname, ext) + new Date().valueOf() + ext);
       },
     }),
-    limits: { fileSize: 10 * 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 router.get('/login', isNotLoggedIn , (req, res) => {
@@ -146,14 +146,14 @@ router.post('/change-photo', isLoggedIn , upload.single('img'), async (req, res)
         });
         // 파일 지우기
         if(member.photo != 'default'){
-            fs.unlink('uploads/account-photo/' + member.photo, function (err) { 
+            fs.unlink('uploads/' + member.photo, function (err) { 
                 if (err) throw err; 
                 console.log('successfully deleted'); 
             });
         }
 
         await Member.update({
-            photo: newFileName
+            photo: 'account-photo/'+newFileName
         }, {
             where: { id }
         });
