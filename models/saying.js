@@ -1,3 +1,4 @@
+const moment = require('moment');
 module.exports = (sequelize, DataTypes) => (
     sequelize.define('Saying',{
         id: {
@@ -25,7 +26,10 @@ module.exports = (sequelize, DataTypes) => (
         },
         regDate:{
             type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+            get: function() {
+                return moment(this.getDataValue('regDate')).format('YYYY-MM-DD')
+            }
         }
     })
 );

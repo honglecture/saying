@@ -3,14 +3,17 @@ window.addEventListener('load', ()=>{
     let getSayingList = ()=>{
         let params = {};
         sendGetRequest("saying-list", params, true, (e) => {
-            let sayingList = e.result;
+            let sayingList = e.sayingList;
+            let sayingLike = e.sayingLike;
+            console.log(sayingList);
+            console.log(sayingLike);
             for (let i = 0; i < sayingList.length; i++) {
-                makeSayingBox(sayingList[i]);
+                makeSayingBox(sayingList[i], sayingLike[i]);
             }
         });	
     }
 
-    let makeSayingBox = (saying)=>{
+    let makeSayingBox = (saying, sayingLike)=>{
         let article = document.createElement('article');
         article.classList.add('saying-box');
 
@@ -69,7 +72,9 @@ window.addEventListener('load', ()=>{
         let menuLeftDiv = document.createElement('div');
         menuLeftDiv.classList.add('saying-menu-left');
         let likeImg = document.createElement('img');
-        likeImg.src = '/images/common/empty-like.svg';
+
+
+
         let chatImg = document.createElement('img');
         chatImg.src = '/images/common/chat.svg';
         chatImg.classList.add('chat');
@@ -81,7 +86,7 @@ window.addEventListener('load', ()=>{
         let menuRightDiv = document.createElement('div');
         menuRightDiv.classList.add('saying-menu-right');
         let dateSpan = document.createElement('span');
-        dateSpan.textContent = '2019-01-24';
+        dateSpan.textContent = saying.regDate;
         menuRightDiv.append(dateSpan);
         menuBoxDiv.append(menuLeftDiv);
         menuBoxDiv.append(menuRightDiv);
@@ -89,7 +94,10 @@ window.addEventListener('load', ()=>{
         let likeBox = document.createElement('div');
         likeBox.classList.add('saying-like-box');
         let likeCntSpan = document.createElement('span');
-        likeCntSpan.textContent = '좋아요 457개';
+
+
+        likeCntSpan.textContent = '좋아요 '+sayingLike.Slikes.length+'개';
+
         likeBox.append(likeCntSpan);
 
         let replyList = document.createElement('div');
@@ -101,7 +109,7 @@ window.addEventListener('load', ()=>{
         replyNicknameSpan.textContent = '고슴도치가시';
         let replyContentSpan = document.createElement('span');
         replyContentSpan.classList.add('reply-content');
-        replyContentSpan.textContent = '오 명언 지렸습니다.';
+        replyContentSpan.textContent = ' 역시 고슴도치님 감동입니다.';
         replyBox.append(replyNicknameSpan);
         replyBox.append(replyContentSpan);
         replyList.append(replyBox);
@@ -126,6 +134,74 @@ window.addEventListener('load', ()=>{
         article.append(replyCountBox);
         
         sayingList.append(article);
+
+
+        if(saying.Slikes!=undefined){
+            if(saying.Slikes.length==0){
+                likeImg.src = '/images/common/empty-like.svg';
+                likeImg.classList.add('like-empty');
+            } else {
+                likeImg.src = '/images/common/full-like.svg';
+                likeImg.classList.add('like-full');
+            }
+            likeImg.onclick = ()=>{
+                if(likeImg.classList.contains('like-empty')){
+                    // 좋아요를 했을 경우
+                    setLike(saying.id, true, (likeCnt)=>{
+                        likeCntSpan.textContent = '좋아요 '+likeCnt.length+'개';
+                        likeImg.classList.remove('like-empty');
+                        likeImg.classList.add('like-full')
+                        likeImg.src = '/images/common/full-like.svg';
+                    });
+                } else {
+                    // 좋아요를 취소했을 경우
+                    setLike(saying.id, false, (likeCnt)=>{
+                        likeCntSpan.textContent = '좋아요 '+likeCnt.length+'개';
+                        likeImg.classList.remove('like-full');
+                        likeImg.classList.add('like-empty')
+                        likeImg.src = '/images/common/empty-like.svg';
+                    });
+                }
+            }
+        } else {
+            likeImg.src = '/images/common/empty-like.svg';
+            likeImg.classList.add('like-empty');
+        }
+
+
+        if(saying.Slikes!=undefined){
+            if(saying.Bookmarks.length==0){
+                bookmarkImg.src = '/images/common/empty-bookmark.svg';
+                bookmarkImg.classList.add('bookmark-empty');
+            } else {
+                bookmarkImg.src = '/images/common/full-bookmark.svg';
+                bookmarkImg.classList.add('bookmark-full');
+            }
+            bookmarkImg.onclick = ()=>{
+                if(bookmarkImg.classList.contains('bookmark-empty')){
+                    // 좋아요를 했을 경우
+                    setBookmark(saying.id, true, ()=>{
+                        bookmarkImg.classList.remove('bookmark-empty');
+                        bookmarkImg.classList.add('bookmark-full');
+                        bookmarkImg.src = '/images/common/full-bookmark.svg';
+                    });
+                } else {
+                    // 좋아요를 취소했을 경우
+                    setBookmark(saying.id, false, ()=>{
+                        bookmarkImg.classList.remove('bookmark-full');
+                        bookmarkImg.classList.add('bookmark-empty')
+                        bookmarkImg.src = '/images/common/empty-bookmark.svg';
+                    });
+                }
+            }
+        } else {
+            bookmarkImg.src = '/images/common/empty-bookmark.svg';
+            bookmarkImg.classList.add('bookmark-empty');
+        }
+
+
+
+
     };
 
     let sayingList = document.querySelector('#saying-list');
@@ -136,8 +212,22 @@ window.addEventListener('load', ()=>{
 });
 
 
+let setLike = (sayingId, flag, callback) => {
+    let params = { sayingId, flag };
+    sendGetRequest("set-like", params, false, (e) => {
+        if(e.result){
+            callback(e.likeCnt);
+        }
+    });
+}
 
-
-
+let setBookmark = (sayingId, flag, callback) => {
+    let params = { sayingId, flag };
+    sendGetRequest("set-bookmark", params, false, (e) => {
+        if(e.result){
+            callback();
+        }
+    });
+}
 
 

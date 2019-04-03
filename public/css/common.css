@@ -488,7 +488,7 @@ body {
     width: 33px;
     margin-right: 5px;
     vertical-align: middle;
-
+    cursor: pointer;
 }
 
 .saying-box .saying-menu-box .chat{
