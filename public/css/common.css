@@ -2,6 +2,11 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 /*----------초기화----------*/
+
+html {
+    -webkit-text-size-adjust: none;
+}
+
 body {
     margin: 0px;
 }
@@ -66,6 +71,16 @@ textarea {
     color: #585858;
     -webkit-tap-highlight-color:transparent;
 }
+
+::-webkit-scrollbar{width: 12px;}
+::-webkit-scrollbar-track {background-color:#f1f1f1;}
+::-webkit-scrollbar-thumb {background-color:#a8a8a8;border-radius: 6px;}
+::-webkit-scrollbar-thumb:hover {background: rgb(199, 190, 190);}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+    width:0px;
+    height:0px;
+    background:#a8a8a8;
+} 
 
 /*----------background----- */
 body {

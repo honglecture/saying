@@ -2,10 +2,13 @@
 <html>
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="HandheldFriendly" content="true">
 <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/index.css">
 <script src="/js/common.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/util/bodyScrollLock/bodyScrollLock.js"></script>
 <title>띵언</title>
 </head>
 <body>
@@ -71,5 +74,67 @@
 		</section>
 	</main>
 	<% include ./include/footer.ejs %>
+
+
+
+	<!-- aside로 묶는다. -->
+	<section id="reply-box">
+		<aside id="reply-info">
+			<section class="reply-top-menu">
+				<div class="reply-menu-left">
+					<span class="reply-title">댓글</span>
+				</div>
+				<div class="reply-cancel">
+					<img src="/images/common/cancel-button.svg" />
+				</div>
+			</section>
+			<section class="reply-content-list">
+
+				
+				<div class="reply-detail-box editable">
+					<div class="reply-account-image">
+						<img src="/images/common/account_circle.svg" />
+					</div>
+					<div class="reply-content-box">
+						<span class="reply-detail-nickname">고슴도치가시</span>
+						<div contentEditable="true" class="reply-detail-content editable"  placeholder="댓글 등록은 마지막에 *** 을 입력해 주세요."></div>
+						<div class="reply-reg-button">
+							
+						</div>
+					</div>
+				</div>
+
+
+				<div class="reply-detail-box">
+						<div class="reply-account-image">
+							<img src="/images/common/account_circle.svg" />
+						</div>
+						<div class="reply-content-box">
+							<span class="reply-detail-nickname">고슴도치가시</span>
+							<span class="reply-detail-content">역시 고슴도치가시님 짱입니다. 존경해요 으흫흐흐흐흐흐ㅡ흐흐흐흐</span>
+							<br />
+							<span class="reply-detail-date">2019-01-24</span>
+						</div>
+					</div>
+
+					<div class="reply-detail-box">
+							<div class="reply-account-image">
+								<img src="/images/common/account_circle.svg" />
+							</div>
+							<div class="reply-content-box">
+								<span class="reply-detail-nickname">고슴도치가시</span>
+								<span class="reply-detail-content">역시 고슴도치가시님 짱입니다. 존경해요 으흫흐흐흐흐흐ㅡ흐흐흐흐</span>
+								<br />
+								<span class="reply-detail-date">2019-01-24</span>
+							</div>
+						</div>
+			</section>
+
+
+		</aside>
+	</section>
+	
+
+
 </body>
 </html>

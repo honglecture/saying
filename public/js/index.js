@@ -1,5 +1,42 @@
 window.addEventListener('load', ()=>{
 
+    let replyBox = document.querySelector("#reply-box");
+    let replyInfo = document.querySelector("#reply-info");
+    let replyCancel = replyInfo.querySelector(".reply-cancel");
+    
+    let body = document.querySelector("body");
+    let main = document.querySelector("#main");
+
+    // $('html, body').css({'overflow': 'hidden', 'height': '100%'});
+
+    // $('#element').on('scroll touchmove mousewheel', function(event) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    //   return false;
+    // });
+
+
+
+
+
+
+    // replyBox.onclick = function(e){
+    //     let el = e.target;
+    //     // if(el.nodeName =="SECTION")
+    //         replyBox.classList.remove("menu-show");
+    //     else 
+    //         return;
+    // }; 
+
+    replyCancel.onclick = function(e){
+        replyBox.classList.remove("menu-show");
+        bodyScrollLock.enableBodyScroll(replyInfo);
+    }
+
+
+
+
+
     let getSayingList = ()=>{
         let params = {};
         sendGetRequest("saying-list", params, true, (e) => {
@@ -78,6 +115,69 @@ window.addEventListener('load', ()=>{
         let chatImg = document.createElement('img');
         chatImg.src = '/images/common/chat.svg';
         chatImg.classList.add('chat');
+
+        chatImg.onclick = function(e){
+
+            // 1. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav). 
+            const targetElement = replyInfo;
+
+            
+            // 2. ...in some event handler after showing the target element...disable body scroll
+            bodyScrollLock.disableBodyScroll(targetElement);
+            
+            // 3. ...in some event handler after hiding the target element...
+            // bodyScrollLock.enableBodyScroll(targetElement);
+            
+            // 4. Useful if we have called disableBodyScroll for multiple target elements,
+            // and we just want a kill-switch to undo all that.
+            // bodyScrollLock.clearAllBodyScrollLocks();
+            
+            // body.style['overflow-x'] = 'hidden';
+            // body.style['overflow-y'] = 'hidden';
+            
+
+            // body.style['height'] = '100%';
+            // body.style['touch-action'] = 'none';
+            // body.style['-webkit-overflow-scrolling'] = 'touch';
+            // 
+
+            
+            // main.style['overflow-x'] = 'hidden';
+            // main.style['overflow-y'] = 'hidden';
+
+            // touch-action: none
+            // document.onscroll = stopDefaultEvent;
+            // document.ontouchmove = stopDefaultEvent;
+            // document.onmousewheel = stopDefaultEvent;
+            // document.ontouchstart = stopDefaultEvent;
+        //     main.addEventListener('touchmove', function(e) {
+        //          e.preventDefault();
+        //     }, { passive: false });
+        //     main.addEventListener('ontouchstart', function(e) {
+        //         e.preventDefault();
+        //    }, { passive: false });
+            // body.addEventListener('ontouchstart', function(e) {
+            //     e.preventDefault();
+            // }, { passive: false });
+            // document.ontouchend= stopDefaultEvent;
+
+
+    // $('#element').on('scroll touchmove mousewheel', function(event) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    //   return false;
+    // });
+
+            // ({'overflow': 'hidden', 'height': '100%'
+
+
+
+            replyBox.classList.add("menu-show");
+            e.stopPropagation();
+        };
+
+
+
         let bookmarkImg = document.createElement('img');
         bookmarkImg.src = '/images/common/empty-bookmark.svg';
         menuLeftDiv.append(likeImg);
@@ -102,17 +202,17 @@ window.addEventListener('load', ()=>{
 
         let replyList = document.createElement('div');
         replyList.classList.add('saying-reply-list');
-        let replyBox = document.createElement('div');
-        replyBox.classList.add('saying-reply-box');
+        let replyBoxDiv = document.createElement('div');
+        replyBoxDiv.classList.add('saying-reply-box');
         let replyNicknameSpan = document.createElement('span');
         replyNicknameSpan.classList.add('reply-nickname');
         replyNicknameSpan.textContent = '고슴도치가시';
         let replyContentSpan = document.createElement('span');
         replyContentSpan.classList.add('reply-content');
         replyContentSpan.textContent = ' 역시 고슴도치님 감동입니다.';
-        replyBox.append(replyNicknameSpan);
-        replyBox.append(replyContentSpan);
-        replyList.append(replyBox);
+        replyBoxDiv.append(replyNicknameSpan);
+        replyBoxDiv.append(replyContentSpan);
+        replyList.append(replyBoxDiv);
 
         let replyCountBox = document.createElement('div');
         replyCountBox.classList.add('saying-reply-count');
@@ -231,3 +331,8 @@ let setBookmark = (sayingId, flag, callback) => {
 }
 
 
+let stopDefaultEvent = (e)=>{
+    e.preventDefault();       
+    e.stopPropagation();
+    return false;
+}
