@@ -17,10 +17,38 @@
 		<h1 class="hidden">인사말</h1>
 		<p class="f-sub-title">당신의 한 문장이 누군가의 인생을 바꿉니다. 자신만의 멋진 명언을 공유해주세요.</p>
 	</section>
+	<section id="search-form" class="section">
+		<h1 class="hidden">검색폼</h1>
+		<div class="search-input-box">
+			<h2 class="hidden">검색인풋</h2>
+			<input type="text" class="search-input" name="value">
+			<img class="search-button" src="/images/common/search-button.svg" />
+		</div>
+		<div class="search-condition-box hidden">
+			<div class="search-condition-item">
+				<h2 class="hidden">필드</h2>
+				<ul>
+					<li data-value="name" class="active">이름</li>
+					<li data-value="content">내용</li>
+					<li data-value="tag">태그</li>
+					<li data-value="nickname">닉네임</li>
+				</ul>
+			</div>
+			<div class="search-condition-category">
+				<h2 class="hidden">카테고리</h2>
+				<select name="category" class="select s-normal">
+					<option value="99">-전체-</option>
+					<% for(let i = 0; i<category.length; i++){%>
+						<option value="<%=category[i].id%>"><%=category[i].value%></option>
+					<%}%>
+				</select>
+			</div>
+		</div>
+	</section>
 	<main id="main" class="section">
 		<h1 class="hidden">메인 컨텐츠</h1>
 		<section id="saying-list">
-			<h2 class="hidden">명언 리스트</h2>
+			<!-- <h2 class="hidden">명언 리스트</h2>
 			<article class="saying-box">
 				<div class="saying-background">
 					<div class="account-info">
@@ -70,7 +98,7 @@
 				<div class="saying-reply-count">
 					<span>댓글 20개</span>
 				</div>
-			</article>
+			</article> -->
 		</section>
 	</main>
 	<% include ./include/footer.ejs %>
@@ -88,46 +116,32 @@
 					<img src="/images/common/cancel-button.svg" />
 				</div>
 			</section>
-			<section class="reply-content-list">
 
-				
-				<div class="reply-detail-box editable">
+			<section class="reply-content-list">
+		
+				<!-- <div class="reply-detail-box editable">
 					<div class="reply-account-image">
 						<img src="/images/common/account_circle.svg" />
 					</div>
 					<div class="reply-content-box">
 						<span class="reply-detail-nickname">고슴도치가시</span>
 						<div contentEditable="true" class="reply-detail-content editable"  placeholder="댓글 등록은 마지막에 *** 을 입력해 주세요."></div>
-						<div class="reply-reg-button">
-							
-						</div>
 					</div>
 				</div>
 
 
 				<div class="reply-detail-box">
-						<div class="reply-account-image">
-							<img src="/images/common/account_circle.svg" />
-						</div>
-						<div class="reply-content-box">
-							<span class="reply-detail-nickname">고슴도치가시</span>
-							<span class="reply-detail-content">역시 고슴도치가시님 짱입니다. 존경해요 으흫흐흐흐흐흐ㅡ흐흐흐흐</span>
-							<br />
-							<span class="reply-detail-date">2019-01-24</span>
-						</div>
+					<div class="reply-account-image">
+						<img src="/images/common/account_circle.svg" />
 					</div>
+					<div class="reply-content-box">
+						<span class="reply-detail-nickname">고슴도치가시</span>
+						<span class="reply-detail-content">역시 고슴도치가시님 짱입니다. 존경해요 으흫흐흐흐흐흐ㅡ흐흐흐흐</span>
+						<br />
+						<span class="reply-detail-date">2019-01-24</span>
+					</div>
+				</div> -->
 
-					<div class="reply-detail-box">
-							<div class="reply-account-image">
-								<img src="/images/common/account_circle.svg" />
-							</div>
-							<div class="reply-content-box">
-								<span class="reply-detail-nickname">고슴도치가시</span>
-								<span class="reply-detail-content">역시 고슴도치가시님 짱입니다. 존경해요 으흫흐흐흐흐흐ㅡ흐흐흐흐</span>
-								<br />
-								<span class="reply-detail-date">2019-01-24</span>
-							</div>
-						</div>
 			</section>
 
 

@@ -91,18 +91,28 @@
 #reply-box #reply-info .reply-content-list .reply-detail-box .reply-account-image{
     display: inline-block;
     vertical-align: top;
-    width: 10%;
+    margin-right: 3px;
+    text-align: center;
 }
 
 #reply-box #reply-info .reply-content-list .reply-detail-box img{
-    width: 30px;
-    height: 30px;
+	width:32px;
+    height:32px;
+    border-radius: 16px;
+    object-fit: cover;
 }
 
 #reply-box #reply-info .reply-content-list .reply-detail-box .reply-content-box{
     display: inline-block;
-    width: 85%;
+    width: 88%;
     line-height: 1.2rem;
+}
+
+#reply-box #reply-info .reply-content-list .reply-detail-box .reply-content-box .reply-delete img{
+    width: 23px;
+    height: 23px;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 #reply-box #reply-info .reply-content-list .reply-detail-box .reply-content-box .reply-detail-nickname{
@@ -133,10 +143,9 @@
 
 #reply-box #reply-info .reply-content-list .reply-detail-box .reply-content-box .reply-detail-content.editable:empty:before{
     margin-top: 2px;
-    content: attr(placeholder);
+    content: "댓글 등록은 마지막에 *** 을 입력해 주세요.";
     display: block;
     color: gray;
-    
 }
 
 
@@ -146,4 +155,63 @@
 }
 
 
+/*-----검색폼-----*/
+#search-form {
 
+}
+
+#search-form .search-input-box{
+    position: relative;
+}
+
+#search-form .search-input-box .search-input{
+    background-color: #f1f3f4;
+    border-radius: 10px;
+    width: 100%;
+    height: 35px;
+    padding: 0 8px;
+    font-weight: 400;
+}
+
+#search-form .search-input-box img{
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#search-form .search-input-box .search-input:hover{
+    background-color: #e8eaed;
+}
+
+
+#search-form .search-condition-box{
+    
+}
+
+#search-form .search-condition-box .search-condition-item{
+    margin-top: 7px;
+}
+
+#search-form .search-condition-box .search-condition-item ul{
+    text-align: center;
+}
+
+#search-form .search-condition-box .search-condition-item li{
+    display: inline-block;
+    /* border-right: 1px solid black; */
+    width: 24%;
+    border: 1px solid #c9c9c9;
+    height: 28px;
+    border-radius: 9px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+#search-form .search-condition-box .search-condition-item li.active{
+    background-color: #585858;
+    color: #ffffff !important;
+}

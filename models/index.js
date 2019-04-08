@@ -14,6 +14,7 @@ db.Category = require('./category')(sequelize, Sequelize);
 db.Saying = require('./saying')(sequelize, Sequelize);
 db.Slike = require('./slike')(sequelize, Sequelize);
 db.Bookmark = require('./bookmark')(sequelize, Sequelize);
+db.Reply = require('./reply')(sequelize, Sequelize);
 
 /**
  * 
@@ -76,6 +77,33 @@ db.Member.hasMany(db.Bookmark, {
 
 db.Bookmark.belongsTo(db.Member, {
   foreignKey: 'memberId',
+  targetKey : 'id'
+});
+
+
+
+
+
+
+
+/* reply */
+db.Saying.hasMany(db.Reply, {
+  foreignKey : 'sayingId',
+  sourceKey : 'id'
+});
+
+db.Reply.belongsTo(db.Saying, {
+  foreignKey: 'sayingId',
+  targetKey : 'id'
+});
+
+db.Member.hasMany(db.Reply, {
+  foreignKey : 'writerId',
+  sourceKey : 'id'
+});
+
+db.Reply.belongsTo(db.Member, {
+  foreignKey: 'writerId',
   targetKey : 'id'
 });
 
