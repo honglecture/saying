@@ -21,7 +21,7 @@
 		<h1 class="hidden">검색폼</h1>
 		<div class="search-input-box">
 			<h2 class="hidden">검색인풋</h2>
-			<input type="text" class="search-input" name="value">
+			<input type="text" class="search-input" name="value" maxlength="50">
 			<img class="search-button" src="/images/common/search-button.svg" />
 		</div>
 		<div class="search-condition-box hidden">
@@ -43,6 +43,34 @@
 					<%}%>
 				</select>
 			</div>
+		</div>
+	</section>
+	<section id="filter-form" class="section">
+		<h1 class="hidden">검색폼</h1>
+		<div class="filter-button-box">
+			<img class="filter-button" src="/images/common/filter-button.svg" />
+			<span>필터</span>
+			<div class="arrow-box">
+				<img src="/images/common/down-arrow.svg" />
+			</div>
+		</div>
+		<div class="filter-icon-box hidden">
+			<ul>
+				<li>
+					<img class="sort-date sort-icon" src="/images/common/time-sort.svg" />
+					<img class="sort-arrow sort-date-arrow" src="/images/common/down-arrow.svg" />
+				</li>
+				<!-- <li>
+					<img class="sort-chat sort-icon" src="/images/common/chat.svg" />
+				</li>
+				-->
+				<!-- <li>
+					<img class="sort-like sort-icon" src="/images/common/empty-like.svg" />
+				</li>  -->
+				<li>
+					<img class="sort-bookmark sort-icon" src="/images/common/empty-bookmark.svg" />
+				</li>
+			</ul>
 		</div>
 	</section>
 	<main id="main" class="section">
@@ -118,6 +146,10 @@
 			</section>
 
 			<section class="reply-content-list">
+
+							<!-- <div class="field full warning-box ">
+					<span class="warning-text">아이디 또는 비밀번호를 다시 확인해 주세요.</span>
+				</div> -->
 		
 				<!-- <div class="reply-detail-box editable">
 					<div class="reply-account-image">

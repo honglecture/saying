@@ -6,6 +6,13 @@ let sayingListParam = {
     category: '99'
 }
 
+let sayingSortFlag = {
+    date : true, //날짜 최신순
+    chat : false, // chat 적용 안함
+    like : false, // like 정렬 false
+    bookmark : false
+};
+
 window.addEventListener('load', ()=>{
 
     let replyBox = document.querySelector("#reply-box");
@@ -24,7 +31,71 @@ window.addEventListener('load', ()=>{
     let searchConditionItem = searchConditionBox.querySelector('.search-condition-item')
 
     let searchConditionCategory = searchConditionBox.querySelector('.search-condition-category');
-    let categorySelect = searchConditionCategory.querySelector('select[name="category"]')
+    let categorySelect = searchConditionCategory.querySelector('select[name="category"]');
+
+    let filterForm = document.querySelector('#filter-form');
+    let filterButtonBox = filterForm.querySelector('.filter-button-box');
+    let filterIconBox = filterForm.querySelector('.filter-icon-box');
+        let sortDate = filterForm.querySelector('.sort-date');
+            let sortDateArrow = filterForm.querySelector('.sort-date-arrow');
+        // let sortChat = filterForm.querySelector('.sort-chat');
+        // let sortLike = filterForm.querySelector('.sort-like');
+        let sortBookmark = filterForm.querySelector('.sort-bookmark');
+
+    filterButtonBox.onclick = (e) => {
+        if(filterIconBox.classList.contains('hidden')){
+            filterIconBox.classList.remove('hidden');
+        } else {
+            filterIconBox.classList.add('hidden');
+        }
+    }
+
+    sortDate.onclick = (e) => {
+        if(sayingSortFlag.date == true){
+            sortDateArrow.src = '/images/common/up-arrow.svg';
+            sayingSortFlag.date = false
+        } else {
+            sortDateArrow.src = '/images/common/down-arrow.svg';
+            sayingSortFlag.date = true
+        }
+        // 검색**************************************************************
+        reflashSayingList();
+    }
+
+    // sortChat.onclick = (e) => {
+    //     if(sayingSortFlag.chat == true){
+    //         sortChat.src = '/images/common/chat.svg';
+    //         sayingSortFlag.chat = false
+    //     } else {
+    //         sortChat.src = '/images/common/full-chat.svg';
+    //         sayingSortFlag.chat = true
+    //     }
+    //     // 검색**************************************************************
+    //     reflashSayingList();
+    // }
+
+    // sortLike.onclick = (e) => {
+    //     if(sayingSortFlag.like == true){
+    //         sortLike.src = '/images/common/empty-like.svg';
+    //         sayingSortFlag.like = false
+    //     } else {
+    //         sortLike.src = '/images/common/full-like.svg';
+    //         sayingSortFlag.like = true
+    //     }
+    //     reflashSayingList();
+    // }
+
+    sortBookmark.onclick = (e) => {
+        if(sayingSortFlag.bookmark == true){
+            sortBookmark.src = '/images/common/empty-bookmark.svg';
+            sayingSortFlag.bookmark = false;
+        } else {
+            sortBookmark.src = '/images/common/full-bookmark.svg';
+            sayingSortFlag.bookmark = true;
+        }
+        // 검색**************************************************************
+        reflashSayingList();
+    }
 
 
     searchConditionItem.onclick = (e) => {
@@ -43,10 +114,7 @@ window.addEventListener('load', ()=>{
         e.target.classList.add('active');
 
         // 검색**************************************************************
-        sayingListDiv.innerHTML = '';
-        sayingListParam.page = 1;
-        sayingListParam.isComplete = false;
-        getSayingList(sayingListParam);
+        reflashSayingList();
     }
 
     categorySelect.onchange = (e)=>{
@@ -55,10 +123,7 @@ window.addEventListener('load', ()=>{
         let categoryValue = categorySelect.value;
         sayingListParam.category = categoryValue;
         // 검색**************************************************************
-        sayingListDiv.innerHTML = '';
-        sayingListParam.page = 1;
-        sayingListParam.isComplete = false;
-        getSayingList(sayingListParam);
+        reflashSayingList();
     }
 
     searchButton.onclick = (e)=>{
@@ -67,23 +132,47 @@ window.addEventListener('load', ()=>{
         let categoryValue = categorySelect.value;
         sayingListParam.category = categoryValue;
         // 검색**************************************************************
-        sayingListDiv.innerHTML = '';
-        sayingListParam.page = 1;
-        sayingListParam.isComplete = false;
-        getSayingList(sayingListParam);
+        reflashSayingList();
     }
 
     searchInput.onfocus = ()=>{
         searchConditionBox.classList.remove('hidden');
     }
 
+    // searchInput.onblur = () => {
+    //     let value = searchInput.value;
+    //     let categoryValue = categorySelect.value;
+    //     if(value=='' && categoryValue==99){
+    //         searchConditionBox.classList.add('hidden');
+    //     }
+    // }
+
     window.onscroll = function(ev) {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            getSayingList(sayingListParam);
+            getSayingList();
         }
     };
+    
+    let reflashSayingList = ()=>{
+        sayingListDiv.innerHTML = '';
+        sayingListParam.page = 1;
+        sayingListParam.isComplete = false;
+        getSayingList();
+    }
 
-    let getSayingList = (params)=>{
+    let getSayingList = ()=>{
+
+        let params = {
+            page : sayingListParam.page, 
+            field : sayingListParam.field, 
+            value : sayingListParam.value, 
+            category : sayingListParam.category,
+            sDate : sayingSortFlag.date,
+            sChat : sayingSortFlag.chat,
+            sLike : sayingSortFlag.like,
+            sBookmark : sayingSortFlag.bookmark,
+        }
+
 
         if(sayingListParam.isComplete!=false){ // 완료되면 return
             return;
@@ -92,6 +181,14 @@ window.addEventListener('load', ()=>{
         sendGetRequest("saying-list", params, false, (e) => {
             let sayingList = e.sayingList;
             let sayingLike = e.sayingLike;
+            let userNickname = e.nickname;
+
+            if(userNickname==undefined){
+                //********* */
+                sortBookmark.onclick = null;
+                // sortLike.onclick = null;
+            }
+
             if(sayingList.length!=5){
                 sayingListParam.isComplete = true;
             }
@@ -126,6 +223,17 @@ window.addEventListener('load', ()=>{
                     }
                 eReplyAccountImageDiv.append(eReplyAccountImage);
 
+                let replyWarningDiv = document.createElement('div');
+                replyWarningDiv.classList.add('field');
+                replyWarningDiv.classList.add('full');
+                replyWarningDiv.classList.add('warning-box');
+                replyWarningDiv.classList.add('hidden');
+                let replyWarningSpan = document.createElement('span');
+                replyWarningSpan.classList.add('warning-text');
+                // replyWarningSpan.textContent = '아이디 또는 비밀번호를 다시 확인해 주세요.';
+
+                replyWarningDiv.append(replyWarningSpan);
+
                 let eReplyContentDiv = document.createElement('div');
                 eReplyContentDiv.classList.add('reply-content-box');
                     let eReplyDetailNicknameSpan = document.createElement('span');
@@ -139,11 +247,34 @@ window.addEventListener('load', ()=>{
                     eReplyDetailContentDiv.onkeyup = () => {
                         let contentLength = eReplyDetailContentDiv.textContent.length;
                         let regFlag = eReplyDetailContentDiv.textContent.substring(contentLength-3,contentLength);
+
+                        //만약 length가 1000 이상이면 경고창
+
+                        // ***
+
+
+                            
+
                         if(regFlag==='***'){
 
                             // 유효성 검사...
+                            if(contentLength<=3){
+                                contentLength = 0;
+                                eReplyDetailContentDiv.textContent='';
+                                replyWarningSpan.textContent = '댓글을 입력해 주세요.'
+                                replyWarningDiv.classList.remove('hidden');
+                                return;
+                            }
+
+                            if(contentLength>=500){
+                                replyWarningSpan.textContent = '댓글은 500자 이내로 입력해 주세요.'
+                                eReplyDetailContentDiv.textContent = eReplyDetailContentDiv.textContent.substring(0,contentLength-3);
+                                replyWarningDiv.classList.remove('hidden');
+                                return;
+                            }
 
                             regReply(sayingId, eReplyDetailContentDiv.textContent.substring(0,contentLength-3), ()=>{
+                                replyWarningDiv.classList.add('hidden');
                                 regFlag="";
                                 contentLength=0;
                                 eReplyDetailContentDiv.textContent='';
@@ -162,7 +293,8 @@ window.addEventListener('load', ()=>{
 
             eReplyDetailBox.append(eReplyAccountImageDiv);
             eReplyDetailBox.append(eReplyContentDiv);
-
+            
+            replyContentList.append(replyWarningDiv);
             replyContentList.append(eReplyDetailBox);
 
         }
@@ -359,7 +491,7 @@ window.addEventListener('load', ()=>{
         likeBox.classList.add('saying-like-box');
         let likeCntSpan = document.createElement('span');
 
-
+        console.log(saying); // 요깅
         likeCntSpan.textContent = '좋아요 '+sayingLike.Slikes.length+'개';
 
         likeBox.append(likeCntSpan);
@@ -500,7 +632,7 @@ window.addEventListener('load', ()=>{
 
     // 시작 페이지
 
-    getSayingList(sayingListParam);
+    getSayingList();
 
 
 });

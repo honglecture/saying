@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Member, Saying, Category, Slike, Bookmark, Reply,  Sequelize: { Op } } = require('../models');
+const { Member, Saying, Category, Slike, Bookmark, Reply,  Sequelize: { Op, fn, col } } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 
@@ -17,14 +17,46 @@ router.get('', async (req, res) => {
 
 router.get('/saying-list', async(req, res) => {
 
-    const { page, field, value, category } = req.query;
-
-    console.log(req.query);
+    const { page, field, value, category, sDate, sBookmark } = req.query;
 
     const user = req.user;
 
     let whereOption = {};
     let nicknameWhereOption = {};
+    let bookmarkRequiredOption = {
+        model : Bookmark,
+        where : {
+            memberId : user.id
+        },
+        required : false,
+    }
+
+    let likeRequiredOption = {
+        model : Bookmark,
+        where : {
+            memberId : user.id
+        },
+        required : false,
+    }
+    
+    if(user!=undefined && sBookmark=='true'){
+        console.log('아니 왜 여기가 들어가냐?')
+        bookmarkRequiredOption = {
+            model : Bookmark,
+            where : {
+                memberId : user.id
+            },
+            required : true,
+        }
+    }
+    
+    let dateFlag = sDate == 'true' ? 'DESC' : 'ASC';
+    
+    let orderOption = [
+        ['regDate', dateFlag],
+        [Reply, 'regDate', 'DESC']
+    ];
+    
     
     if(field!='nickname'){
         whereOption[field] = {
@@ -47,39 +79,34 @@ router.get('/saying-list', async(req, res) => {
     }
 
 
-    const sayingLike = await Saying.findAll({
-        include: [
-            {
-                model: Member,
-                attributes: ['nickname'],
-                // required : false,
-                where : nicknameWhereOption
-
-            },
-            {
-                model: Slike,
-                required : false,
-            },
-            {
-                model : Reply,
-                required : false
-            },  
-        ],
-        where : whereOption,
-        offset: offset,
-        limit: 5,
-        order: [
-            [ 'regDate', 'DESC'],
-            [Reply, 'regDate', 'DESC'],
-        ],
-    });
     if(user==undefined){
+        const sayingLike = await Saying.findAll({
+            include: [
+                {
+                    model: Member,
+                    attributes: ['nickname'],
+                    where : nicknameWhereOption
+    
+                },
+                {
+                    model: Slike,
+                    required : false,
+                },
+                {
+                    model : Reply,
+                    required : false,
+                },  
+            ],
+            where : whereOption,
+            offset: offset,
+            limit: 5,
+            order: orderOption
+        });
         const saying = await Saying.findAll({
             include: [
             {
                 model: Member,
                 attributes: ['nickname'],
-                // required : false,
                 where : nicknameWhereOption
             },
             {
@@ -91,16 +118,13 @@ router.get('/saying-list', async(req, res) => {
                         attributes: ['nickname'],
                         required : false,
                     }
-                ],
+                ]
             }],
             where : whereOption,
             offset: offset,
             limit: 5
             ,
-            order: [
-                [ 'regDate', 'DESC'],
-                [Reply, 'regDate', 'DESC'],
-            ],
+            order: orderOption
 
         });
         return res.status(200).json({
@@ -109,12 +133,34 @@ router.get('/saying-list', async(req, res) => {
         });    
     }
 
+    const sayingLike = await Saying.findAll({
+        include: [
+            {
+                model: Member,
+                attributes: ['nickname'],
+                where : nicknameWhereOption
+            },
+            {
+                model: Slike,
+                required : false,
+            },
+            {
+                model : Reply,
+                required : false,
+            },
+            bookmarkRequiredOption,
+        ],
+        where : whereOption,
+        offset: offset,
+        limit: 5,
+        order: orderOption
+    });
+
     const saying = await Saying.findAll({
         include: [
             {
                 model: Member,
                 attributes: ['nickname'],
-                // required : false,
                 where : nicknameWhereOption
 
             },
@@ -125,13 +171,8 @@ router.get('/saying-list', async(req, res) => {
                 },
                 required : false
             },
-            {
-                model : Bookmark,
-                where : {
-                    memberId : user.id
-                },
-                required : false
-            },
+            bookmarkRequiredOption,
+
             {
                 model : Reply,
                 required : false,
@@ -141,21 +182,19 @@ router.get('/saying-list', async(req, res) => {
                         attributes: ['nickname'],
                         required : false,
                     }
-                ],
+                ]
             },
         ],
         where : whereOption,
         offset: offset,
         limit: 5,
-        order: [
-            [ 'regDate', 'DESC'],
-            [Reply, 'regDate', 'DESC'],
-        ],
+        order: orderOption
     });
     
     return res.status(200).json({
         sayingList : saying,
-        sayingLike : sayingLike
+        sayingLike : sayingLike,
+        nickname : user.nickname
     });    
        
 });

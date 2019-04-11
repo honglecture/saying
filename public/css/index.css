@@ -124,6 +124,8 @@
 #reply-box #reply-info .reply-content-list .reply-detail-box .reply-content-box .reply-detail-content{
     font-size: 0.9rem;
     font-weight: 400;
+    white-space:normal;
+    word-break:break-all;
 }
 
 
@@ -214,4 +216,63 @@
 #search-form .search-condition-box .search-condition-item li.active{
     background-color: #585858;
     color: #ffffff !important;
+}
+
+
+#filter-form {
+}
+
+
+#filter-form .filter-button-box {
+    cursor: pointer;
+    position: relative;
+}
+
+#filter-form .filter-button-box img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#filter-form .filter-button-box span {
+    font-weight: 500;
+    font-size: 18px;
+    vertical-align: top;
+}
+
+#filter-form .filter-button-box .arrow-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#filter-form .filter-button-box .arrow-box img{
+    width: 25px;
+    height: 25px;
+}
+
+#filter-form .filter-icon-box{
+    margin-top: 10px;
+    
+}
+
+#filter-form .filter-icon-box ul li{
+    display: inline-block;
+    margin-right: 5px;
+    width: 50px;
+    cursor: pointer;
+}
+
+#filter-form .filter-icon-box .sort-icon{
+    vertical-align: middle;
+    width: 30px;
+}
+
+#filter-form .filter-icon-box .sort-arrow{
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-left: -5px;
+
 }
