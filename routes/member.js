@@ -2,7 +2,7 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const { Member, Sequelize: { Op } } = require('../models');
+const { Member, Saying, Sequelize: { Op } } = require('../models');
 
 const multer = require('multer');
 const path = require('path');
@@ -157,6 +157,26 @@ router.post('/change-photo', isLoggedIn , upload.single('img'), async (req, res)
         }, {
             where: { id }
         });
+
+
+        await Saying.update({
+            photo: 'account-photo/'+newFileName
+        }, {
+            where: { 
+                writerId : id,
+                [Op.or]: [
+                    { photo : 'default' },
+                    { photo : { [Op.like] : 'account%' } }
+                ]
+            }
+        });
+
+
+
+
+
+
+
 
         return res.status(200).json({
             result: true

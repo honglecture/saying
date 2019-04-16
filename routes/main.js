@@ -17,18 +17,24 @@ router.get('', async (req, res) => {
 
 router.get('/saying-list', async(req, res) => {
 
-    const { page, field, value, category, sDate, sBookmark } = req.query;
+    const { page, field, value, category, sDate, sBookmark, sMy } = req.query;
 
     const user = req.user;
 
     let whereOption = {};
     let nicknameWhereOption = {};
+
+    let myRequiredOption = {}
     let bookmarkRequiredOption = {
          model : Bookmark,
         // where : {
         //     memberId : user.id
         // },
          required : false,
+    }
+
+    if(user!=undefined && sMy=='true'){
+        myRequiredOption = { id : user.id };
     }
     
     if(user!=undefined && sBookmark=='true'){
@@ -129,7 +135,9 @@ router.get('/saying-list', async(req, res) => {
             {
                 model: Member,
                 attributes: ['nickname'],
-                where : nicknameWhereOption
+                where : {
+                    [Op.and]: [nicknameWhereOption , myRequiredOption]
+                } 
             },
             {
                 model: Slike,
@@ -152,8 +160,9 @@ router.get('/saying-list', async(req, res) => {
             {
                 model: Member,
                 attributes: ['nickname'],
-                where : nicknameWhereOption
-
+                where : {
+                    [Op.and]: [nicknameWhereOption , myRequiredOption]
+                } 
             },
             {
                 model : Slike,

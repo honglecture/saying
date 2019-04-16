@@ -10,7 +10,8 @@ let sayingSortFlag = {
     date : true, //날짜 최신순
     chat : false, // chat 적용 안함
     like : false, // like 정렬 false
-    bookmark : false
+    bookmark : false,
+    my : false
 };
 
 window.addEventListener('load', ()=>{
@@ -37,16 +38,32 @@ window.addEventListener('load', ()=>{
     let filterButtonBox = filterForm.querySelector('.filter-button-box');
     let filterIconBox = filterForm.querySelector('.filter-icon-box');
         let sortDate = filterForm.querySelector('.sort-date');
-            let sortDateArrow = filterForm.querySelector('.sort-date-arrow');
+        let sortDateArrow = filterForm.querySelector('.sort-date-arrow');
         // let sortChat = filterForm.querySelector('.sort-chat');
         // let sortLike = filterForm.querySelector('.sort-like');
         let sortBookmark = filterForm.querySelector('.sort-bookmark');
+        let sortMy = filterForm.querySelector('.sort-my');
+        
 
     filterButtonBox.onclick = (e) => {
         if(filterIconBox.classList.contains('hidden')){
             filterIconBox.classList.remove('hidden');
         } else {
             filterIconBox.classList.add('hidden');
+        }
+    }
+
+    if(sortMy != undefined){
+        sortMy.onclick = (e) => {
+            if(sayingSortFlag.my == true){
+                sortMy.src = '/images/common/empty-my.svg';
+                sayingSortFlag.my = false;
+            } else {
+                sortMy.src = '/images/common/full-my.svg';
+                sayingSortFlag.my = true;
+            }
+            // 검색**************************************************************
+            reflashSayingList();
         }
     }
 
@@ -169,9 +186,8 @@ window.addEventListener('load', ()=>{
             value : sayingListParam.value, 
             category : sayingListParam.category,
             sDate : sayingSortFlag.date,
-            sChat : sayingSortFlag.chat,
-            sLike : sayingSortFlag.like,
             sBookmark : sayingSortFlag.bookmark,
+            sMy : sayingSortFlag.my
         }
 
 
@@ -421,7 +437,12 @@ window.addEventListener('load', ()=>{
 
         let accountImg = document.createElement('img');
         accountImg.classList.add('account-image');
-        accountImg.src = '/img/'+saying.photo;
+        if(saying.photo=='default'){
+            accountImg.src = '/images/common/account_circle.svg';
+        } else {
+            accountImg.src = '/img/'+saying.photo;
+        }
+        
 
         let nameSpan = document.createElement('span');
         nameSpan.classList.add('saying-name');
@@ -436,6 +457,11 @@ window.addEventListener('load', ()=>{
         contentP.classList.add('saying-content');
         contentP.textContent = saying.content;
         contentDiv.append(contentP);
+
+
+        let contentHtml = contentP.innerHTML;
+        contentP.innerHTML = contentHtml.replace(/(\n|\r\n)/g,'<br />');
+        // contentP.textContent = contentP.textContent
 
         let writerDiv = document.createElement('div');
         writerDiv.classList.add('saying-writer');
