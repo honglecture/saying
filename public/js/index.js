@@ -139,6 +139,7 @@ window.addEventListener('load', ()=>{
         searchConditionBox.classList.remove('hidden');
     }
 
+
     // searchInput.onblur = () => {
     //     let value = searchInput.value;
     //     let categoryValue = categorySelect.value;

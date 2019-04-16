@@ -1,0 +1,36 @@
+#gomin-list {
+    border-top: 2px solid #c9c9c9;
+    border-bottom: 2px solid #c9c9c9;
+}
+
+#gomin-list .gomin-box{
+    border-bottom: 1px solid #c9c9c9;
+    padding: 5px 0px;
+}
+
+#gomin-list .gomin-box:nth-child(odd){
+    background-color: #f7f7f7;
+}
+
+#gomin-list .gomin-box:last-child{
+    border-bottom: none;
+}
+
+#gomin-list .gomin-title-box {
+    font-size: 1rem;
+}
+
+#gomin-list .gomin-title-box .reply-count{
+    font-weight: 500;
+}
+
+#gomin-list .gomin-info-box {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+#gomin-list .gomin-info-box .like-count {
+    color: #ff5555;
+    font-weight: 500;
+}
+

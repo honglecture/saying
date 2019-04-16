@@ -15,6 +15,8 @@ db.Saying = require('./saying')(sequelize, Sequelize);
 db.Slike = require('./slike')(sequelize, Sequelize);
 db.Bookmark = require('./bookmark')(sequelize, Sequelize);
 db.Reply = require('./reply')(sequelize, Sequelize);
+db.Gomin = require('./gomin')(sequelize, Sequelize);
+
 
 /**
  * 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/gomin/gomin.css">
+<script src="/js/common.js"></script>
+<script src="/js/gomin/list.js"></script>
+<title>띵언</title>
+</head>
+<body>
+	<% include ../include/header.ejs %>
+	<section class="section">
+		<h1 class="hidden">인사말</h1>
+		<p class="f-sub-title">고민게시판</p>
+	</section>
+	<main id="main" class="section">
+        <h1 class="hidden">메인 컨텐츠</h1>
+        <section id="gomin-list">
+            <ul class="gomin-list-ul">
+                <li class="gomin-box">
+                    <div class="gomin-title-box">
+                        <span>이곳은 제목입니다.</span>
+                        <span class="reply-count">(10)</span>
+                    </div>
+                    <div class="gomin-info-box">
+                        <span>고슴도치가시 | 조회 20132 | 2019-01-02 | 추천</span>
+                        <span class="like-count"> 20</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+	</main>
+	<% include ../include/footer.ejs %>
+</body>
+</html>

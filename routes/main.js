@@ -24,23 +24,14 @@ router.get('/saying-list', async(req, res) => {
     let whereOption = {};
     let nicknameWhereOption = {};
     let bookmarkRequiredOption = {
-        model : Bookmark,
-        where : {
-            memberId : user.id
-        },
-        required : false,
-    }
-
-    let likeRequiredOption = {
-        model : Bookmark,
-        where : {
-            memberId : user.id
-        },
-        required : false,
+         model : Bookmark,
+        // where : {
+        //     memberId : user.id
+        // },
+         required : false,
     }
     
     if(user!=undefined && sBookmark=='true'){
-        console.log('아니 왜 여기가 들어가냐?')
         bookmarkRequiredOption = {
             model : Bookmark,
             where : {
