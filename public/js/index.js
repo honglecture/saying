@@ -518,7 +518,6 @@ window.addEventListener('load', ()=>{
         likeBox.classList.add('saying-like-box');
         let likeCntSpan = document.createElement('span');
 
-        console.log(saying); // 요깅
         likeCntSpan.textContent = '좋아요 '+sayingLike.Slikes.length+'개';
 
         likeBox.append(likeCntSpan);
